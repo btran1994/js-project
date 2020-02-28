@@ -467,8 +467,8 @@ Game.World = function (friction = 0.85, gravity = 2) {
 
     this.zone_id = "";
 
-    this.carrots = [];// the array of carrots in this zone;
-    this.carrot_count = 0;// the number of carrots you have.
+    this.carrots = [];
+    this.carrot_count = 0;
     this.doors = [];
     this.door = undefined;
 
@@ -481,9 +481,6 @@ Game.World.prototype = {
     constructor: Game.World,
 
     collideObject: function (object) {
-
-        /* I got rid of the world boundary collision. Now it's up to the tiles to keep
-        the player from falling out of the world. */
 
         let bottom, left, right, top, value;
 
@@ -546,7 +543,7 @@ Game.World.prototype = {
             if (this.door.destination_x != -1) {
 
                 this.player.setCenterX(this.door.destination_x);
-                this.player.setOldCenterX(this.door.destination_x);// It's important to reset the old position as well.
+                this.player.setOldCenterX(this.door.destination_x);
 
             }
 
@@ -557,7 +554,7 @@ Game.World.prototype = {
 
             }
 
-            this.door = undefined;// Make sure to reset this.door so we don't trigger a zone load.
+            this.door = undefined;
 
         }
 
