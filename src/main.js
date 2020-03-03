@@ -1,20 +1,9 @@
 window.addEventListener("load", function (event) {
-
     "use strict";
-
-    //// CONSTANTS ////
-
     const ZONE_PREFIX = "src/zone";
     const ZONE_SUFFIX = ".json";
-
-    /////////////////
-    //// CLASSES ////
-    /////////////////
-
     const AssetsManager = function () {
-
         this.tile_set_image = undefined;
-
     };
 
     AssetsManager.prototype = {
@@ -24,31 +13,18 @@ window.addEventListener("load", function (event) {
             request.addEventListener("load", function (event) {
                 callback(JSON.parse(this.responseText));
             }, { once: true });
-
             request.open("GET", url);
             request.send();
-
         },
 
         requestImage: function (url, callback) {
-
             let image = new Image();
-
             image.addEventListener("load", function (event) {
-
                 callback(image);
-
             }, { once: true });
-
             image.src = url;
-
         },
-
     };
-
-    ///////////////////
-    //// FUNCTIONS ////
-    ///////////////////
 
     let keyDownUp = function (event) {
         controller.keyDownUp(event.type, event.keyCode);
@@ -108,9 +84,7 @@ window.addEventListener("load", function (event) {
         }
     };
 
-    /////////////////
-    //// OBJECTS ////
-    /////////////////
+    //Objects
 
     let assets_manager = new AssetsManager();
     let controller = new Controller();
@@ -123,9 +97,7 @@ window.addEventListener("load", function (event) {
     p.innerHTML = "Carrots: 0";
     document.body.appendChild(p);
 
-    ////////////////////
-    //// INITIALIZE ////
-    ////////////////////
+    //Initialize
 
     display.buffer.canvas.height = game.world.height;
     display.buffer.canvas.width = game.world.width;
