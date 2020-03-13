@@ -5,32 +5,44 @@
 <head>
     <meta name="viewport" content="user-scalable=no,width=device-width">
     <link href="game.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>js-project</title>
 
 </head>
 
 <body>
-    <canvas></canvas>
-    <script type="text/javascript">
+    
+    <div class="game">
+        <div class="linksNDirections">
+            <div class="directions">Collect carrots using the arrow keys to move.</div>
+            <div class="links">
+                <a class="fa github" target="_blank" href="https://github.com/btran1994">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="fa linkedin" target="_blank" href="https://www.linkedin.com/in/brian-tran-7ab0261a1/">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+        <canvas></canvas>
+        <script type="text/javascript">
 
-        let part = String(window.location).split("?")[1];
+            let part = String(window.location).split("?")[1];
 
-        let parts = {
-            "07": ["src/controller.js", "src/display.js", "src/engine.js", "src/game.js", "src/main.js"],
-        };
+            let parts = ["src/controller.js", "src/display.js", "src/engine.js", "src/game.js", "src/main.js"]
 
-        part = "07";
+            for (let index = 0; index < parts.length; index++) {
 
-        for (let index = 0; index < parts[part].length; index++) {
+                let script = document.createElement("script");
+                script.setAttribute("type", "text/javascript");
+                script.setAttribute("src", parts[index]);
+                document.head.appendChild(script);
 
-            let script = document.createElement("script");
-            script.setAttribute("type", "text/javascript");
-            script.setAttribute("src", parts[part][index]);
-            document.head.appendChild(script);
+            }
 
-        }
-
-    </script>
+        </script>
+    </div>
 
 </body>
 

@@ -3,7 +3,6 @@
 html { height:100%; width:100%; }
 
 body {
-
   align-content:center;
   align-items:space-around;
   background-color:#202830;
@@ -14,7 +13,37 @@ body {
 
 }
 
-/* 04/07/2018 */
+.game {
+  display: flex;
+}
+
+.linksNDirections {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+  font-size: 50px;
+}
+
+.fa {
+  text-decoration: none;
+  color: lightgray;
+  font-size: 24px;
+}
+
+.directions {
+  color: white;
+  margin-top: 400px;
+  font-size: 24px;
+  margin-left: 20px;
+  margin-right: 20px; 
+}
 
 canvas { image-rendering:pixelated; }
 
