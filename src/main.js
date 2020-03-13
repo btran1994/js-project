@@ -57,14 +57,6 @@ window.addEventListener("load", function (event) {
             frame.x, frame.y,
             game.world.player.x + Math.floor(game.world.player.width * 0.5 - frame.width * 0.5) + frame.offset_x,
             game.world.player.y + frame.offset_y, frame.width, frame.height);
-        for (let index = game.world.grass.length - 1; index > -1; --index) {
-            let grass = game.world.grass[index];
-            frame = game.world.tile_set.frames[grass.frame_value];
-            display.drawObject(assets_manager.tile_set_image,
-                frame.x, frame.y,
-                grass.x + frame.offset_x,
-                grass.y + frame.offset_y, frame.width, frame.height);
-        }
         p.innerHTML = "Carrots: " + game.world.carrot_count;
         display.render();
     };
@@ -105,7 +97,7 @@ window.addEventListener("load", function (event) {
 
     assets_manager.requestJSON(ZONE_PREFIX + game.world.zone_id + ZONE_SUFFIX, (zone) => {
         game.world.setup(zone);
-        assets_manager.requestImage("rabbit-trap.png", (image) => {
+        assets_manager.requestImage("rabbit.png", (image) => {
             assets_manager.tile_set_image = image;
             resize();
             engine.start();

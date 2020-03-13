@@ -46,7 +46,6 @@ Game.Animator.prototype = {
 };
 
 Game.Collider = function () {
-    //y-first collision checks to prevent falling out of bounds
     this.collide = function (value, object, tile_x, tile_y, tile_size) {
         switch (value) {
             case 1: this.collidePlatformTop(object, tile_y); break;
@@ -194,7 +193,6 @@ Game.MovingObject.prototype = {
 Object.assign(Game.MovingObject.prototype, Game.Object.prototype);
 Game.MovingObject.prototype.constructor = Game.MovingObject;
 
-/* The carrot class extends Game.Object and Game.Animation. */
 Game.Carrot = function (x, y) {
 
     Game.Object.call(this, x, y, 7, 14);
@@ -202,7 +200,6 @@ Game.Carrot = function (x, y) {
 
     this.frame_index = Math.floor(Math.random() * 2);
 
-    //floating effect
     this.base_x = x;
     this.base_y = y;
     this.position_x = Math.random() * Math.PI * 2;
@@ -222,17 +219,6 @@ Object.assign(Game.Carrot.prototype, Game.Animator.prototype);
 Object.assign(Game.Carrot.prototype, Game.Object.prototype);
 Game.Carrot.prototype.constructor = Game.Carrot;
 
-Game.Grass = function (x, y) {
-    Game.Animator.call(this, Game.Grass.prototype.frame_sets["wave"], 25);
-    this.x = x;
-    this.y = y;
-};
-Game.Grass.prototype = {
-    frame_sets: {
-        "wave": [14, 15, 16, 15]
-    }
-};
-Object.assign(Game.Grass.prototype, Game.Animator.prototype);
 
 Game.Door = function (door) {
     Game.Object.call(this, door.x, door.y, door.width, door.height);
@@ -321,7 +307,6 @@ Game.TileSet = function (columns, tile_size) {
     new f(65, 112, 13, 16, 0, -4), // jump-right
     new f(13, 112, 13, 16, 0, -4), new f(26, 112, 13, 16, 0, -4), new f(39, 112, 13, 16, 0, -4), new f(52, 112, 13, 16, 0, -4), // walk-right
     new f(81, 112, 14, 16), new f(96, 112, 16, 16), // carrot
-    new f(112, 115, 16, 4), new f(112, 124, 16, 4), new f(112, 119, 16, 4) // grass
     ];
 };
 Game.TileSet.prototype = { constructor: Game.TileSet };
@@ -378,7 +363,6 @@ Game.World.prototype = {
     setup: function (zone) {
         this.carrots = new Array();
         this.doors = new Array();
-        this.grass = new Array();
         this.collision_map = zone.collision_map;
         this.graphical_map = zone.graphical_map;
         this.columns = zone.columns;
@@ -393,11 +377,6 @@ Game.World.prototype = {
         for (let index = zone.doors.length - 1; index > -1; --index) {
             let door = zone.doors[index];
             this.doors[index] = new Game.Door(door);
-        }
-
-        for (let index = zone.grass.length - 1; index > -1; --index) {
-            let grass = zone.grass[index];
-            this.grass[index] = new Game.Grass(grass[0] * this.tile_set.tile_size, grass[1] * this.tile_set.tile_size + 12);
         }
 
         if (this.door) {
@@ -431,11 +410,6 @@ Game.World.prototype = {
             if (door.collideObjectCenter(this.player)) {
                 this.door = door;
             };
-        }
-
-        for (let index = this.grass.length - 1; index > -1; --index) {
-            let grass = this.grass[index];
-            grass.animate();
         }
         this.player.updateAnimation();
     }
